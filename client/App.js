@@ -8,6 +8,7 @@ import {
   View
 } from 'react-native';
 import { StackNavigator, } from 'react-navigation';
+import Splash from './common/splash';
 import ConnectAccount from './screens/set-up/connect-account';
 import AllowHistoryAccess from './screens/set-up/allow-history-access';
 import ConnectCar from './screens/set-up/connect-car';
@@ -15,15 +16,29 @@ import ConnectCar from './screens/set-up/connect-car';
 const Screens = StackNavigator({
   connectAccount: { screen: ConnectAccount },
   allowHistoryAccess: { screen: AllowHistoryAccess },
-  connectCar: { screen: ConnectCar }
+  connectCar: { screen: ConnectCar },
+  splash: { screen: Splash },
 });
 
 
 export default class App extends React.Component {
+  state = {
+    visibleComponent: Splash
+  };
+
+  componentDidMount() {
+    setTimeout(() =>
+      this.setState({ visibleComponent: Screens }),
+      1500
+    );
+  }
+
   render() {
+    const VisibleComponent = this.state.visibleComponent;
+
     return (
       <View style={styles.container}>
-        <Screens />
+        <VisibleComponent />
       </View>
     );
   }

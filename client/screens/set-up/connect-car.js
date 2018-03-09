@@ -30,7 +30,7 @@ export default class ConnectAccount extends React.Component {
       <View style={styles.main}>
       <Image source={car} style={styles.image} />
         <Button
-          onPress={() => navigate('mainView')}
+          onPress={() => navigate('main')}
           title="Proceed"
         />
       </View>

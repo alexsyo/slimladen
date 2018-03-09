@@ -12,12 +12,14 @@ import Splash from './common/splash';
 import ConnectAccount from './screens/set-up/connect-account';
 import AllowHistoryAccess from './screens/set-up/allow-history-access';
 import ConnectCar from './screens/set-up/connect-car';
+import MainScreen from './screens/main-view/main';
 
 const Screens = StackNavigator({
   connectAccount: { screen: ConnectAccount },
   allowHistoryAccess: { screen: AllowHistoryAccess },
   connectCar: { screen: ConnectCar },
   splash: { screen: Splash },
+  main: { screen: MainScreen }
 });
 
 

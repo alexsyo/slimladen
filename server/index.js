@@ -5,7 +5,5 @@ const port = 3000;
 
 app.use('/abc', (req, res) => res.send("asfw"));
 
-//
-
 app.listen(port);
 

@@ -14,33 +14,49 @@ import AllowHistoryAccess from './screens/set-up/allow-history-access';
 import ConnectCar from './screens/set-up/connect-car';
 import MainScreen from './screens/main-view/main';
 
+import axios from 'axios';
+
 const Screens = StackNavigator({
-  connectAccount: { screen: ConnectAccount },
-  allowHistoryAccess: { screen: AllowHistoryAccess },
-  connectCar: { screen: ConnectCar },
+  // connectAccount: { screen: ConnectAccount },
+  // allowHistoryAccess: { screen: AllowHistoryAccess },
+  // connectCar: { screen: ConnectCar },
+  main: { screen: MainScreen },
   splash: { screen: Splash },
-  main: { screen: MainScreen }
 });
 
 
 export default class App extends React.Component {
   state = {
-    visibleComponent: Splash
+    splash: true,
+    locations: []
   };
 
   componentDidMount() {
-    setTimeout(() =>
-      this.setState({ visibleComponent: Screens }),
-      1500
-    );
+    setTimeout(() => {
+      this.setState({ splash: false });
+      this.poll();
+    }, 1500);
+  }
+
+  poll = () => {
+    setInterval(() => {
+    axios.get('https://vandebron.localtunnel.me/sessionStatus')
+      .then(res => {
+        this.setState({ locations: this.state.locations.concat(res.data) })
+      })
+    }, 5000)
   }
 
   render() {
-    const VisibleComponent = this.state.visibleComponent;
+    // const VisibleComponent = this.state.visibleComponent;
+
+    const Component = this.state.splash 
+          ? <Splash />
+          : <Screens screenProps={this.state.locations} />
 
     return (
       <View style={styles.container}>
-        <VisibleComponent />
+        {Component}
       </View>
     );
   }

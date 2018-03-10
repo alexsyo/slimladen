@@ -24,6 +24,7 @@ app.post('/', async (req, res) => {
 			const location = await findLocation(evse_id, connector_no);
 			const schedule = await getSchedule();
 			const smartChargeResponse = await smartCharge(schedule.data);
+			console.log('-- session scheduled --')
 		} catch(err) {
 			console.log(err)
 			const {status, statusText} = err.response;
@@ -145,7 +146,7 @@ const subscribe = async () => {
 	const response = await axios.post(
 		'https://elaad-pp.driivz.com/externalIncoming/secured/ocpi/subscribe',
 		{
-			"endpoint" : "https://vandebron.localtunnel.me/",
+			"endpoint" : "https://vandebron2.localtunnel.me/",
   			"interface_type" : "ndr"
 		},
 		{
@@ -158,4 +159,6 @@ const subscribe = async () => {
 
 	subscription_id = response.data.subscription_id
 }
+
+subscribe();
 

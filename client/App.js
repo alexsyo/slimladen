@@ -31,16 +31,25 @@ export default class App extends React.Component {
     locations: []
   };
 
-  componentDidMount() {
-    setTimeout(() => {
+  componentDidMount = async () => {
+    setTimeout(async () => {
       this.setState({ splash: false });
+      await this.startSession();
       this.poll();
     }, 1500);
   }
 
-  poll = () => {
+  startSession = async () => {
+    return axios.post('https://vandebron2.localtunnel.me', {
+      "event_type": "session_started",
+      "evse_id": "NL-EVN-E32486-13208",
+      "connector_no": "2"
+    })
+  }
+
+  poll = async () => {
     setInterval(() => {
-    axios.get('https://vandebron.localtunnel.me/sessionStatus')
+    return axios.get('https://vandebron2.localtunnel.me/sessionStatus')
       .then(res => {
         this.setState({ locations: this.state.locations.concat(res.data) })
       })

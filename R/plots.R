@@ -1,5 +1,6 @@
 library(jsonlite)
-library(dplyr, magrittr)
+library(dplyr)
+library(magrittr)
 library(ggplot2)
 source("extract_forecast.R")
 
@@ -17,10 +18,9 @@ par(new = T)
 plot(city_forecast$datetimeFC, city_forecast$home_Weekdays, type='l', col="RED", axes = F, xlab=NA, ylab=NA)
 axis(side = 4)
 mtext(side = 4, line = 3, 'Avg Number of sessions')
+legend(locator(), legend=c("Home sessions", "Work sessions", "Public Sessions"),
+       col=c("red", "blue", "green"), cex=0.8, lty=1)
 lines(city_forecast$datetimeFC, city_forecast$work_Weekdays, type='l', col="BLUE")
-legend(1, 95, legend=c("Line 1", "Line 2"),
-       col=c("red", "blue"), lty=1:2, cex=0.8)
-
 lines(city_forecast$datetimeFC, city_forecast$out_Weekdays, type='l', col="GREEN")
 
 summary(city_forecast$forecast)

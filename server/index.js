@@ -35,11 +35,17 @@ app.post('/', async (req, res) => {
 })
 
 app.get('/findLocation', async(req, res) => {
-	const location = await findLocation(
-		'NL-EVN-E32486-13208',
-		'2'
-	);
-	res.send('location: ' + JSON.stringify(location))
+	try {
+		const location = await findLocation(
+			'NL-EVN-E32486-13208',
+			'2'
+		);
+		res.send('location: ' + JSON.stringify(location))
+	} catch(err) {
+		console.log(err)
+		const {status, statusText} = err.response;
+		// return res.status(status).send(statusText)
+	} 
 })
 
 app.get('/chargeSchedule', async (req, res) => {
@@ -102,15 +108,11 @@ const findLocation = async (evse_id, connector_no) => {
 		}
 	)
 
-	return response.data.reduce(acc, i => {
-		const evse = i.evses.find(x => x.evse_id === evse_id)
-		if (evse) {
-			const location = evse.connectors
-				.find(c => c.connector_no === connector_no).location.point
-
-			if(location) acc = location
-		}
-	});
+	return response.data.map(b => {
+			const evse = b.evses.find(x => x.evse_id === evse_id)
+			if (evse)
+				return evse.connectors.find(c => c.connector_no === connector_no).location.point
+		}).find(x => x)
 }
 
 const getSchedule = async () => {

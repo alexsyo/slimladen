@@ -5,6 +5,9 @@ import battery from '../../assets/battery.png';
 
 export default class MainScreen extends React.Component {
   render() {
+
+    const locations = this.props.screenProps.map(x => <Text style={{ color: 'white' }}>x</Text>)
+
     return (
       <ScrollView>
         <Card title="Battery level">
@@ -18,14 +21,7 @@ export default class MainScreen extends React.Component {
         </Card>
 
         <Card title="Location">
-          <Text style={{ color: 'white' }}>content</Text>
-          <Text style={{ color: 'white' }}>content</Text>
-          <Text style={{ color: 'white' }}>content</Text>
-          <Text style={{ color: 'white' }}>content</Text>
-          <Text style={{ color: 'white' }}>content</Text>
-          <Text style={{ color: 'white' }}>content</Text>
-          <Text style={{ color: 'white' }}>content</Text>
-          <Text style={{ color: 'white' }}>content</Text>
+          {locations}
         </Card>
       </ScrollView>
     );

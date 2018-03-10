@@ -17,7 +17,7 @@ get_charge_plan <- function(location, soc)
   city <- "Amsterdam"
   forecasts <- get_solar_forecasts(province, date, city)
   
-  start_time <- as.POSIXct("2018-03-09 10:48:53 GMT")
+  start_time <- Sys.time()
   duration <- 8*60*60
   
   chargingschedule_periods <- forecasts %>%

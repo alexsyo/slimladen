@@ -10,7 +10,27 @@ export default class MainScreen extends React.Component {
 
   render() {
 
-    const locations = this.props.screenProps.length
+    const locations = this.props.screenProps.locations.length
+    const startingSession = this.props.screenProps.startingSession
+
+
+    const view = startingSession
+      ? <View style={{ 
+            alignItems: 'center',
+            justifyContent: 'center'}}>
+          <Text style={{ color: 'white', fontSize: 20 }}>starting session...</Text>
+          </View>
+      : <View style={{ 
+            alignItems: 'center',
+   justifyContent: 'center',
+             flex: 1, flexDirection: 'row' }}>
+            <Text style={{ 
+               color: 'white', fontSize: 30, paddingRight: 10
+               }}>
+              {locations}
+            </Text>
+            <Image style={{width: 80, height: 80}} source={sun} />
+          </View>;
 
     return (
       <ScrollView>
@@ -27,17 +47,7 @@ export default class MainScreen extends React.Component {
 
 
         <Card title="Zonnetjes">
-          <View style={{ 
-            alignItems: 'center',
-   justifyContent: 'center',
-             flex: 1, flexDirection: 'row' }}>
-            <Text style={{ 
-               color: 'white', fontSize: 30, paddingRight: 10
-               }}>
-              {locations}
-            </Text>
-            <Image style={{width: 80, height: 80}} source={sun} />
-          </View>
+          {view}
         </Card>
       </ScrollView>
     );

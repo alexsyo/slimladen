@@ -28,13 +28,15 @@ const Screens = StackNavigator({
 export default class App extends React.Component {
   state = {
     splash: true,
-    locations: []
+    locations: [],
+    startingSession: true
   };
 
   componentDidMount = async () => {
     setTimeout(async () => {
       this.setState({ splash: false });
       await this.startSession();
+      this.setState({ startingSession: false });
       this.poll();
     }, 1500);
   }
@@ -61,7 +63,10 @@ export default class App extends React.Component {
 
     const Component = this.state.splash 
           ? <Splash />
-          : <Screens screenProps={this.state.locations} />
+          : <Screens screenProps={{
+            locations: this.state.locations,
+            startingSession: this.state.startingSession
+          }} />
 
     return (
       <View style={styles.container}>

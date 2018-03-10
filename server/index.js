@@ -143,9 +143,9 @@ const smartCharge = async (schedule) => {
 const subscribe = async () => {
 	console.log('subscribing')
 	const response = await axios.post(
-		'https://elaad-pp.driivz.com/externalIncoming/secured/ocpi/subscribe',
+		'http://elaad-pp.driivz.com/externalIncoming/secured/ocpi/subscribe',
 		{
-			"endpoint" : "https://vandebron.localtunnel.me/",
+			"endpoint" : "http://vandebron2.localtunnel.me/",
   			"interface_type" : "ndr"
 		},
 		{

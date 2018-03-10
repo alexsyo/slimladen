@@ -2,7 +2,7 @@
 #* @get /chargePlan
 get_charge_plan <- function(location, soc)
 {
-  source("get_solar_forecasts.R")
+  source("R/get_solar_forecasts.R")
   soc <- as.integer(soc)
   #we assume a battery capacity of 85kWh
   #and a charger capacity of 11kW
